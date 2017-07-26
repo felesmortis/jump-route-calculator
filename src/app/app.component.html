@@ -34,7 +34,7 @@
   <md-list-item *ngIf="displayAmount()">
     <div>
       <label>Cost: </label>
-      <span>{{amount() | currency:'ISK':true}}</span>
+      <span>{{amount() | number:'2.0-0'}}</span>
     </div>
   </md-list-item>
   <md-list-item *ngIf="errors()">
