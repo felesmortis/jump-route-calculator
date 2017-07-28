@@ -8,6 +8,7 @@
   <md-list-item>
     <md-input-container class="example-full-width">
       <input mdInput min="1" max="350000" type="number" [(ngModel)]="loadSize" placeholder="Load Size">
+      <span mdSuffix>m3</span>
     </md-input-container>
   </md-list-item>
   <md-list-item>
@@ -16,8 +17,8 @@
     </md-select>
   </md-list-item>
   <md-list-item>
-    <md-checkbox [(ngModel)]="rush">Rush!</md-checkbox>
-    &nbsp;
+    <!--<md-checkbox [(ngModel)]="rush">Rush!</md-checkbox>
+    &nbsp;-->
     <md-checkbox [(ngModel)]="packaged">Containers?</md-checkbox>
   </md-list-item>
   <md-list-item *ngIf="displayLightyears()">
