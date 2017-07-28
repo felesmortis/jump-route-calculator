@@ -78,7 +78,7 @@ export class AppComponent {
     return text.join("\r\n");
   }
   desc = function() {
-      let desc: string = (this.rush ? "RUSH!" : "") + " " + (this.packaged ? "Packaged" : "");
+      let desc: string = (this.rush ? "RUSH!" : "") + " " + (this.packaged ? "Containers" : "");
       return desc.trim();
   }
   displayAmount = function() {
