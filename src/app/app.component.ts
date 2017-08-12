@@ -43,7 +43,7 @@ export class AppComponent {
   ];
 
 
-  url = "https://crest-tq.eveonline.com/market/10000002/orders/sell/?type=https://public-crest.eveonline.com/inventory/types/{0}/";
+  url:string = "https://crest-tq.eveonline.com/market/10000002/orders/sell/?type=https://public-crest.eveonline.com/inventory/types/{0}/";
 
  // jitaId = 60003760;
 
@@ -54,13 +54,16 @@ export class AppComponent {
     16274//Helium
   ];
 
-  maxLoad = 350000;
-  JfcSkill = 4;
-  JfSkill = 4;
-  dotlanUrl = "http://evemaps.dotlan.net/jump/Rhea,544,S,I/{0}:{1}:{0}";
-  priceMultiplier = 2;
-  basePrice = 20000000;
-  cynoPrice = 3000000;
+  maxLoad:number = 340000;
+  maxReturnLoad:number = 120000;
+  minLoad:number = 50000;
+  minRushLoad:number = 175000;
+  JfcSkill:number = 4;
+  JfSkill:number = 4;
+  dotlanUrl:string = "http://evemaps.dotlan.net/jump/Rhea,544,S,I/{0}:{1}:{0}";
+  priceMultiplier:number = 2;
+  basePrice:number = 20000000;
+  cynoPrice:number = 3000000;
 
   packaged: boolean;
   rush: boolean;
@@ -73,7 +76,7 @@ export class AppComponent {
   //TODO: This is a gross violation of everything architecture
   errors = function() {
     let text: string[] = [];
-    if(this.loadSize > 350000 || this.loadSize < 1) text.push("Load size must be between 1 and 350,000m3");
+    if(this.loadSize > this.maxLoad || this.loadSize < 1) text.push("Load size must be between 1 and 350,000m3");
     else if(this.lightyears < 0 || this.lightyears > 120) text.push("Lightyears must be between 0 and 120");
     return text.join("\r\n");
   }
@@ -89,7 +92,7 @@ export class AppComponent {
     if(!this.selectedStation) return 0;
     let roundTripLy: number = (this.lightyears * 2) || (this.selectedStation.To + this.selectedStation.From);
     let fuel: number = roundTripLy * (4400 * (1 - 0.1 * this.JfcSkill) * (1 - 0.1 * this.JfSkill));
-    let cargoPrice: number = (this.packaged ? 1.5 : 1) * this.priceMultiplier * (((this.rush ? Math.min(this.loadSize, 175000) : Math.min(this.loadSize, 50000)) / this.maxLoad) * fuel * this.fuelCost);
+    let cargoPrice: number = (this.packaged ? 1.5 : 1) * this.priceMultiplier * (((this.rush ? Math.min(this.loadSize, this.minRushLoad) : Math.min(this.loadSize, this.minLoad)) / this.maxLoad) * fuel * this.fuelCost);
     let isk: number = (this.selectedStation.Multiplier * (this.rush ? 2 : 1) * this.basePrice + this.cynoPrice + cargoPrice);
     return ~~isk;
   }
